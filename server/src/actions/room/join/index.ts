@@ -7,7 +7,11 @@ class JoinRoom extends GeneralAction {
   }
 
   public exec(event: JoinRoomEventType) {
-    console.log('meu evento para entrar na sala foi: ', event)
+    const { socket } = this
+    const { roomId } = event
+
+    socket.join(roomId)
+    console.info(`Usuário entrou na sala ${roomId}`)
   }
 }
 

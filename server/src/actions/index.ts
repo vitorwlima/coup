@@ -7,6 +7,7 @@ interface GeneralAction {
 
 class GeneralAction {
   constructor(socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) {
+    this.socket = socket
   }
 }
 
