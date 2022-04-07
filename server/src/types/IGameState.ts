@@ -1,7 +1,7 @@
 import { IPlayer } from './IPlayer'
 
 type IGameState = {
-  state: 'lobby' | 'ingame' | 'gameover'
+  state: 'initial' | 'lobby' | 'ingame' | 'gameover'
   players: IPlayer[]
   moves: any[]
   nextAction: any

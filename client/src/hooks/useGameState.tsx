@@ -15,7 +15,7 @@ type Player = {
 }
 
 interface GameState {
-  state: 'lobby' | 'ingame' | 'gameover'
+  state: 'initial' | 'lobby' | 'ingame' | 'gameover'
   players: Player[]
   moves: any[] // log
   nextAction: any
@@ -23,7 +23,7 @@ interface GameState {
 }
 
 const defaultGameState: GameState = {
-  state: 'lobby',
+  state: 'initial',
   players: [],
   moves: [],
   nextAction: {},

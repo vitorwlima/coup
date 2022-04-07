@@ -1,41 +1,30 @@
 import type { NextPage } from 'next'
-import { useState } from 'react'
+import Head from 'next/head'
 
 import { useGameState } from 'src/hooks/useGameState'
-import { socket } from 'src/socket'
+import { Gameover } from 'src/screens/Gamover'
+import { Ingame } from 'src/screens/Ingame'
+import { Initial } from 'src/screens/Initial'
+import { Lobby } from 'src/screens/Lobby'
 
 const Home: NextPage = () => {
-  const [roomId, setRoomId] = useState('')
-  const [name, setName] = useState('')
-  const gameState = useGameState()
+  const { state } = useGameState()
 
-  const joinRoom = () => {
-    socket.emit('join-room', { roomId, name })
-  }
-
-  const createRoom = () => {
-    socket.emit('create-room', { name })
-  }
+  const renderCurrentScreen = () =>
+    ({
+      initial: <Initial />,
+      lobby: <Lobby />,
+      ingame: <Ingame />,
+      gameover: <Gameover />
+    }[state])
 
   return (
-    <div>
-      <label>Código da sala</label>
-      <input value={roomId} onChange={e => setRoomId(e.target.value)} />
-      <div />
-      <label>Nome</label>
-      <input value={name} onChange={e => setName(e.target.value)} />
-      <div />
-      <button onClick={() => joinRoom()}>Entrar na sala</button>
-      <button onClick={() => createRoom()}>Criar sala</button>
-      <div>{gameState.roomId && `ID da sala: ${gameState.roomId}`}</div>
-      <ul>
-        {gameState.players?.map(player => (
-          <li key={player.socketId}>
-            {player.name} {player.isMe && '(Eu)'}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Head>
+        <title>Coup | Jogar online</title>
+      </Head>
+      <main className='font-roboto'>{renderCurrentScreen()}</main>
+    </>
   )
 }
 
