@@ -1,4 +1,3 @@
-import { io } from '../../..'
 import { GameState } from '../../../gameState'
 import { GeneralAction } from '../../index'
 import { CreateRoomEventType } from './type'
