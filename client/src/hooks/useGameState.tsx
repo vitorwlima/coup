@@ -1,7 +1,7 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { socket } from '../socket'
+import { createContext, ReactNode, useContext, useState } from 'react'
 
-import { Cards } from '../types/cards'
+import { socket } from 'src/socket'
+import { Cards } from 'src/types/cards'
 
 type Player = {
   socketId: string

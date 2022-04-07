@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
-import { useGameState } from './hooks/useGameState'
+import { useState } from 'react'
 
-import { socket } from './socket'
+import { useGameState } from 'src/hooks/useGameState'
+import { socket } from 'src/socket'
 
 const Home: NextPage = () => {
   const [roomId, setRoomId] = useState('')
