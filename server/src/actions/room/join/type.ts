@@ -1,4 +1,5 @@
 type JoinRoomEventType = {
+  name: string
   roomId: string
 }
 

@@ -1,0 +1,3 @@
+const counterMoves = {}
+
+export { counterMoves }

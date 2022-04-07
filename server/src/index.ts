@@ -8,7 +8,9 @@ const app = express()
 const server = http.createServer(app)
 
 server.listen(process.env.PORT, () => {
-  console.log(`SERVER IS RUNNING ON PORT ${process.env.PORT}`)
+  console.info(`SERVER IS RUNNING ON PORT ${process.env.PORT}`)
 })
 
-runSocket(server)
+const { io } = runSocket(server)
+
+export { io }
