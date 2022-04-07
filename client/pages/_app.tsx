@@ -1,7 +1,12 @@
 import type { AppProps } from 'next/app'
+import { GameStateContextProvider } from './hooks/useGameState'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <GameStateContextProvider>
+      <Component {...pageProps} />
+    </GameStateContextProvider>
+  )
 }
 
 export default MyApp
