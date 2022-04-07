@@ -3,7 +3,7 @@ enum Cards {
   CAPITAO = 'capitao',
   CONDESSA = 'condessa',
   DUQUE = 'duque',
-  EMBAIXADOR = 'embaixador',
+  EMBAIXADOR = 'embaixador'
 }
 
 export { Cards }

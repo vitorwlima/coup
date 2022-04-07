@@ -7,7 +7,10 @@ interface GeneralAction {
 }
 
 class GeneralAction {
-  constructor(socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>, roomId: string) {
+  constructor(
+    socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
+    roomId: string
+  ) {
     this.socket = socket
     this.roomId = roomId
   }

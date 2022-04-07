@@ -1,7 +1,7 @@
 const moves = {
   income: {
     name: 'renda',
-    usedBy: 'all',
+    usedBy: 'all'
   }
 }
 
