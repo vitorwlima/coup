@@ -1,12 +1,12 @@
 import { Server } from 'socket.io'
 import http from 'http'
 
-import { JoinRoom } from './actions/room/join'
-import { JoinRoomEventType } from './actions/room/join/type'
-import { UpdatePlayerListEventType } from './actions/room/updatePlayerList/type'
-import { UpdatePlayerList } from './actions/room/updatePlayerList'
-import { CreateRoom } from './actions/room/create'
-import { CreateRoomEventType } from './actions/room/create/type'
+import { JoinRoom } from './actions/toHost/room/join'
+import { JoinRoomEventType } from './actions/toHost/room/join/type'
+import { UpdatePlayerListEventType } from './actions/toGamestate/room/updatePlayerList/type'
+import { UpdatePlayerList } from './actions/toGamestate/room/updatePlayerList'
+import { CreateRoom } from './actions/toGamestate/room/create'
+import { CreateRoomEventType } from './actions/toGamestate/room/create/type'
 
 const runSocket = (server: http.Server) => {
   const io = new Server(server, { cors: { origin: process.env.ORIGIN } })

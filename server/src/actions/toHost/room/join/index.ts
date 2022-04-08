@@ -1,6 +1,6 @@
-import { io } from '../../..'
-import { GameState } from '../../../gameState'
-import { GeneralAction } from '../../index'
+import { io } from '../../../..'
+import { GameState } from '../../../../gameState'
+import { GeneralAction } from '../../../index'
 import { JoinRoomEventType } from './type'
 
 class JoinRoom extends GeneralAction {
@@ -20,10 +20,19 @@ class JoinRoom extends GeneralAction {
     }
 
     const gameState = GameState.getInstance(roomId)
-
     socket.join(roomId)
-    gameState.createPlayer({ socketId: socket.id, name })
-    console.info(`Usuário ${socket.id} entrou na sala ${roomId}`)
+
+    const newPlayer = {
+      alive: true,
+      cards: [],
+      coins: 0,
+      ready: false,
+      winner: false,
+      socketId: socket.id,
+      name
+    }
+
+    gameState.emitEvent('new-player-joined', newPlayer)
   }
 }
 

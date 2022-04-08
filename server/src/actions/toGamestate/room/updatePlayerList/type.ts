@@ -1,5 +1,5 @@
-import { IGameState } from '../../../types/IGameState'
-import { IPlayer } from '../../../types/IPlayer'
+import { IGameState } from '../../../../types/IGameState'
+import { IPlayer } from '../../../../types/IPlayer'
 
 type UpdatePlayerListEventType = {
   player: IPlayer

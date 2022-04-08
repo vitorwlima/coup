@@ -1,5 +1,5 @@
-import { GameState } from '../../../gameState'
-import { GeneralAction } from '../../index'
+import { GameState } from '../../../../gameState'
+import { GeneralAction } from '../../../index'
 import { UpdatePlayerListEventType } from './type'
 
 class UpdatePlayerList extends GeneralAction {
@@ -13,7 +13,11 @@ class UpdatePlayerList extends GeneralAction {
 
     const gameState = GameState.getInstance(roomId)
 
-    gameState.updatePlayerList(player, currentGameState)
+    const players = [...currentGameState.players, player]
+    const newGameState = { ...currentGameState, players }
+
+    gameState.update(newGameState)
+    console.info(`Usuário ${player.socketId} entrou na sala ${roomId}`)
   }
 }
 
