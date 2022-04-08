@@ -8,6 +8,8 @@ import {
 } from './actions/toGamestate/room/updatePlayerList'
 import { CreateRoom, CreateRoomEventType } from './actions/toGamestate/room/create'
 import { Events } from './types/Events'
+import { SwitchReady, SwitchReadyEventType } from './actions/toGamestate/player/switchReady'
+import { StartGame, StartGameEventType } from './actions/toGamestate/room/startGame'
 
 const runSocket = (server: http.Server) => {
   const io = new Server(server, { cors: { origin: process.env.ORIGIN } })
@@ -26,6 +28,13 @@ const runSocket = (server: http.Server) => {
         new UpdatePlayerList({ socket, roomId, gameState }).exec(args)
       }
     )
+    socket.on(Events.START_GAME, ({ roomId, gameState }: StartGameEventType) => {
+      new StartGame({ socket, roomId, gameState }).exec()
+    })
+
+    socket.on(Events.SWITCH_READY, ({ roomId, gameState }: SwitchReadyEventType) => {
+      new SwitchReady({ socket, roomId, gameState }).exec()
+    })
   })
 
   return { io }

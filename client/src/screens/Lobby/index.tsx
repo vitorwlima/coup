@@ -4,15 +4,27 @@ import { Title } from 'src/components/Title'
 import { Footer } from 'src/components/Footer'
 import { Button } from 'src/components/Button'
 import { BackButton } from 'src/components/BackButton'
+import { Events } from 'src/types/events'
 
 const Lobby = () => {
   const {
     gameState: { roomId, players },
-    myPlayer
+    myPlayer,
+    emitEvent
   } = useGameState()
+  const canStart = players.length >= 2 && players.every(player => player.ready)
 
   const handleCopyRoomId = () => {
     navigator.clipboard.writeText(roomId)
+  }
+
+  const handleStart = () => {
+    if (!canStart) return
+    emitEvent(Events.START_GAME)
+  }
+
+  const handleReady = () => {
+    emitEvent(Events.SWITCH_READY)
   }
 
   return (
@@ -37,7 +49,12 @@ const Lobby = () => {
           ))}
         </ul>
         <div className='flex flex-col gap-y-4 min-w-[40%]'>
-          <Button>{myPlayer.host ? 'Começar' : 'Pronto'}</Button>
+          <Button
+            onClick={myPlayer?.host ? () => handleStart() : () => handleReady()}
+            disabled={myPlayer?.host && !canStart}
+          >
+            {myPlayer?.host ? 'Começar' : 'Pronto'}
+          </Button>
           <BackButton>Voltar</BackButton>
         </div>
       </section>

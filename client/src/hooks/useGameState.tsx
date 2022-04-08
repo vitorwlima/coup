@@ -27,7 +27,7 @@ type GameState = {
 type GameStateCtx = {
   gameState: GameState
   myPlayer: Player
-  emitEvent: (eventName: string, args: Object) => void
+  emitEvent: (eventName: string, args?: Object) => void
 }
 
 const defaultGameState: GameState = {
@@ -61,7 +61,7 @@ const GameStateContextProvider = ({ children }: { children: ReactNode }) => {
   const [myPlayer, setMyPlayer] = useState(defaultPlayer)
   const isHost = gameState.players.length === 1 || gameState.players[0]?.isMe
 
-  const emitEvent = (eventName: string, args: any) => {
+  const emitEvent = (eventName: string, args?: any) => {
     socket.emit(eventName, { args, gameState, roomId: gameState.roomId })
   }
 
@@ -82,8 +82,7 @@ const GameStateContextProvider = ({ children }: { children: ReactNode }) => {
   socket.on(Events.NEW_PLAYER_JOINED, (event: Player) => {
     if (!isHost) return
     emitEvent(Events.UPDATE_PLAYER_LIST, {
-      player: event,
-      currentGameState: gameState
+      player: event
     })
   })
 
