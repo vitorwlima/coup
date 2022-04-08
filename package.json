@@ -1,0 +1,13 @@
+{
+  "name": "coup",
+  "version": "1.0.0",
+  "repository": "git@github.com:vitorwlima/coup.git",
+  "author": "Vitor <vitorwlima13@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4"
+  }
+}

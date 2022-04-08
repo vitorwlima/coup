@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "start": "tsc && node build/index.js"
+    "start": "tsc && node build/index.js",
+    "lint": "eslint --fix --ext .ts,.tsx ."
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

@@ -1,7 +1,15 @@
+# ROOT
+node_modules
+
+# SERVER
 server/node_modules
 server/.env
 server/build
 
+# CLIENT
 client/node_modules
 client/.next
 client/.env
+
+# HUSKY
+.husky/_

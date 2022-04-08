@@ -14,5 +14,6 @@
     "prettier/prettier": "error",
     "no-redeclare": "off",
     "no-unused-vars": "off"
-  }
+  },
+  "ignorePatterns": ["build"]
 }
