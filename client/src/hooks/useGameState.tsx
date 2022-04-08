@@ -14,7 +14,7 @@ type Player = {
   isMe: boolean
 }
 
-interface GameState {
+type GameState = {
   state: 'initial' | 'lobby' | 'ingame' | 'gameover'
   players: Player[]
   moves: any[] // log
