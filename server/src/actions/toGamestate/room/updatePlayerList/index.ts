@@ -1,15 +1,21 @@
 import { GameState } from '../../../../gameState'
+import { IPlayer } from '../../../../types/IPlayer'
 import { GeneralAction } from '../../../index'
-import { UpdatePlayerListEventType } from './type'
+
+type UpdatePlayerListEventType = GeneralAction & {
+  args: {
+    player: IPlayer
+  }
+}
 
 class UpdatePlayerList extends GeneralAction {
-  constructor({ socket, roomId }: GeneralAction) {
-    super(socket, roomId)
+  constructor({ socket, roomId, gameState }: GeneralAction) {
+    super(socket, roomId, gameState)
   }
 
-  public exec(event: UpdatePlayerListEventType) {
-    const { roomId } = this
-    const { player, currentGameState } = event
+  public exec(event: UpdatePlayerListEventType['args']) {
+    const { roomId, gameState: currentGameState } = this
+    const { player } = event
 
     const gameState = GameState.getInstance(roomId)
 
@@ -21,4 +27,4 @@ class UpdatePlayerList extends GeneralAction {
   }
 }
 
-export { UpdatePlayerList }
+export { UpdatePlayerList, UpdatePlayerListEventType }

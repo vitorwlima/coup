@@ -2,14 +2,19 @@ import { io } from '../../../..'
 import { GameState } from '../../../../gameState'
 import { defaultGameState } from '../../../../gameState/defaultGameState'
 import { GeneralAction } from '../../../index'
-import { CreateRoomEventType } from './type'
+
+type CreateRoomEventType = GeneralAction & {
+  args: {
+    name: string
+  }
+}
 
 class CreateRoom extends GeneralAction {
-  constructor({ socket, roomId }: GeneralAction) {
-    super(socket, roomId)
+  constructor({ socket, roomId, gameState }: GeneralAction) {
+    super(socket, roomId, gameState)
   }
 
-  public exec(event: CreateRoomEventType) {
+  public exec(event: CreateRoomEventType['args']) {
     const { socket } = this
     const { name } = event
 
@@ -49,4 +54,4 @@ class CreateRoom extends GeneralAction {
   }
 }
 
-export { CreateRoom }
+export { CreateRoom, CreateRoomEventType }

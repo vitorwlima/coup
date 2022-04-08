@@ -8,7 +8,9 @@ import { Initial } from 'src/screens/Initial'
 import { Lobby } from 'src/screens/Lobby'
 
 const Home: NextPage = () => {
-  const { state } = useGameState()
+  const {
+    gameState: { state }
+  } = useGameState()
 
   const renderCurrentScreen = () =>
     ({

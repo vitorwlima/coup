@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 
 import { socket } from 'src/socket'
 import { Cards } from 'src/types/cards'
+import { Events } from 'src/types/events'
 
 type Player = {
   socketId: string
@@ -12,14 +13,21 @@ type Player = {
   alive: boolean
   winner: boolean
   isMe: boolean
+  host: boolean
 }
 
 type GameState = {
   state: 'initial' | 'lobby' | 'ingame' | 'gameover'
   players: Player[]
-  moves: any[] // log
+  moves: any[]
   nextAction: any
   roomId: string
+}
+
+type GameStateCtx = {
+  gameState: GameState
+  myPlayer: Player
+  emitEvent: (eventName: string, args: Object) => void
 }
 
 const defaultGameState: GameState = {
@@ -30,33 +38,60 @@ const defaultGameState: GameState = {
   roomId: ''
 }
 
-const GameStateContext = createContext<GameState>(defaultGameState)
-
-const emitEvent = (eventName: string, roomId: string, args: any) => {
-  socket.emit(eventName, { ...args, roomId })
+const defaultPlayer: Player = {
+  socketId: '',
+  ready: false,
+  cards: [],
+  coins: 0,
+  name: '',
+  alive: true,
+  winner: false,
+  isMe: false,
+  host: false
 }
+
+const GameStateContext = createContext<GameStateCtx>({
+  gameState: defaultGameState,
+  myPlayer: defaultPlayer,
+  emitEvent: () => {}
+})
 
 const GameStateContextProvider = ({ children }: { children: ReactNode }) => {
   const [gameState, setGameState] = useState(defaultGameState)
-  const isFirstPlayer = gameState.players.length === 1 || gameState.players[0]?.isMe
+  const [myPlayer, setMyPlayer] = useState(defaultPlayer)
+  const isHost = gameState.players.length === 1 || gameState.players[0]?.isMe
 
-  socket.on('update-game', (event: GameState) => {
+  const emitEvent = (eventName: string, args: any) => {
+    socket.emit(eventName, { args, gameState, roomId: gameState.roomId })
+  }
+
+  socket.on(Events.UPDATE_GAME, (event: GameState) => {
     const newGameState = {
       ...event,
-      players: event.players.map(player => ({ ...player, isMe: player.socketId === socket.id }))
+      players: event.players.map((player, index) => ({
+        ...player,
+        isMe: player.socketId === socket.id,
+        host: index === 0,
+        ready: player.ready || index === 0
+      }))
     }
+    setMyPlayer(newGameState.players.find(player => player.isMe)!)
     setGameState(newGameState)
   })
 
-  socket.on('new-player-joined', (event: Player) => {
-    if (!isFirstPlayer) return
-    emitEvent('update-player-list', gameState.roomId, {
+  socket.on(Events.NEW_PLAYER_JOINED, (event: Player) => {
+    if (!isHost) return
+    emitEvent(Events.UPDATE_PLAYER_LIST, {
       player: event,
       currentGameState: gameState
     })
   })
 
-  return <GameStateContext.Provider value={gameState}>{children}</GameStateContext.Provider>
+  return (
+    <GameStateContext.Provider value={{ gameState, myPlayer, emitEvent }}>
+      {children}
+    </GameStateContext.Provider>
+  )
 }
 
 const useGameState = () => {

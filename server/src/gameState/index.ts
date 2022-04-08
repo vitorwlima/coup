@@ -1,4 +1,5 @@
 import { io } from '..'
+import { Events } from '../types/Events'
 import { IGameState } from '../types/IGameState'
 
 interface GameState {
@@ -18,7 +19,7 @@ class GameState {
 
   public update(newGameState: IGameState) {
     const { roomId } = this
-    io.to(roomId).emit('update-game', newGameState)
+    io.to(roomId).emit(Events.UPDATE_GAME, newGameState)
   }
 
   public emitEvent(eventName: string, payload: any) {

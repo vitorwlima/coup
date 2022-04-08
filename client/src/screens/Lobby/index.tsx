@@ -6,7 +6,10 @@ import { Button } from 'src/components/Button'
 import { BackButton } from 'src/components/BackButton'
 
 const Lobby = () => {
-  const { roomId, players } = useGameState()
+  const {
+    gameState: { roomId, players },
+    myPlayer
+  } = useGameState()
 
   const handleCopyRoomId = () => {
     navigator.clipboard.writeText(roomId)
@@ -27,14 +30,14 @@ const Lobby = () => {
         </div>
         <ul className='flex flex-col gap-y-1 min-w-[40%]'>
           {players.map((player, index) => (
-            <li key={player.socketId}>
+            <li key={player.socketId} className={player.ready ? 'text-green-500' : 'text-red-500'}>
               {index + 1}. {player.name}
               {player.isMe && ' (eu)'}
             </li>
           ))}
         </ul>
         <div className='flex flex-col gap-y-4 min-w-[40%]'>
-          <Button>Começar</Button>
+          <Button>{myPlayer.host ? 'Começar' : 'Pronto'}</Button>
           <BackButton>Voltar</BackButton>
         </div>
       </section>

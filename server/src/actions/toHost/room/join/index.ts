@@ -1,16 +1,23 @@
 import { io } from '../../../..'
 import { GameState } from '../../../../gameState'
+import { Events } from '../../../../types/Events'
 import { GeneralAction } from '../../../index'
-import { JoinRoomEventType } from './type'
+
+type JoinRoomEventType = GeneralAction & {
+  args: {
+    name: string
+    roomId: string
+  }
+}
 
 class JoinRoom extends GeneralAction {
-  constructor({ socket, roomId }: GeneralAction) {
-    super(socket, roomId)
+  constructor({ socket, roomId, gameState }: GeneralAction) {
+    super(socket, roomId, gameState)
   }
 
-  public exec(event: JoinRoomEventType) {
-    const { socket, roomId } = this
-    const { name } = event
+  public exec(event: JoinRoomEventType['args']) {
+    const { socket } = this
+    const { name, roomId } = event
 
     const roomExists = !!io.sockets.adapter.rooms.get(roomId)
 
@@ -32,8 +39,8 @@ class JoinRoom extends GeneralAction {
       name
     }
 
-    gameState.emitEvent('new-player-joined', newPlayer)
+    gameState.emitEvent(Events.NEW_PLAYER_JOINED, newPlayer)
   }
 }
 
-export { JoinRoom }
+export { JoinRoom, JoinRoomEventType }

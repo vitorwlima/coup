@@ -1,15 +1,17 @@
 import { useState } from 'react'
 
-import { socket } from 'src/socket'
 import { Title } from 'src/components/Title'
 import { Footer } from 'src/components/Footer'
 import { PregameContainer } from 'src/components/PregameContainer'
 import { Button } from 'src/components/Button'
 import { BackButton } from 'src/components/BackButton'
+import { useGameState } from 'src/hooks/useGameState'
+import { Events } from 'src/types/events'
 
 type ActionToTake = 'none' | 'create' | 'join'
 
 const Initial = () => {
+  const { emitEvent } = useGameState()
   const [actionToTake, setActionToTake] = useState<ActionToTake>('none')
   const [name, setName] = useState('')
   const [roomId, setRoomId] = useState('')
@@ -18,11 +20,11 @@ const Initial = () => {
     'border-[1px] p-1 rounded-sm focus-visible:outline-none focus-visible:border-cyan-500'
 
   const handleCreateRoom = () => {
-    socket.emit('create-room', { name })
+    emitEvent(Events.CREATE_ROOM, { name })
   }
 
   const handleJoinRoom = () => {
-    socket.emit('join-room', { roomId, name })
+    emitEvent(Events.JOIN_ROOM, { roomId, name })
   }
 
   const renderFirstRoomScreen = () => {
