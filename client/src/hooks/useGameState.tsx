@@ -14,6 +14,7 @@ type Player = {
   winner: boolean
   isMe: boolean
   host: boolean
+  order: number
 }
 
 type GameState = {
@@ -47,7 +48,8 @@ const defaultPlayer: Player = {
   alive: true,
   winner: false,
   isMe: false,
-  host: false
+  host: false,
+  order: 0
 }
 
 const GameStateContext = createContext<GameStateCtx>({

@@ -9,6 +9,7 @@ type IPlayer = {
   alive: boolean
   winner: boolean
   isMe?: boolean
+  order: number
 }
 
 export type { IPlayer }

@@ -46,7 +46,8 @@ class CreateRoom extends GeneralAction {
       ready: false,
       winner: false,
       name,
-      socketId: socket.id
+      socketId: socket.id,
+      order: 0
     }
 
     gameState.update({ ...defaultGameState, players: [newPlayer], roomId })

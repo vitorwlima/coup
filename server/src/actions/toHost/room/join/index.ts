@@ -1,6 +1,7 @@
 import { io } from '../../../..'
 import { GameState } from '../../../../gameState'
 import { Events } from '../../../../types/Events'
+import { IPlayer } from '../../../../types/IPlayer'
 import { GeneralAction } from '../../../index'
 
 type JoinRoomEventType = GeneralAction & {
@@ -29,14 +30,15 @@ class JoinRoom extends GeneralAction {
     const gameState = GameState.getInstance(roomId)
     socket.join(roomId)
 
-    const newPlayer = {
+    const newPlayer: IPlayer = {
       alive: true,
       cards: [],
       coins: 0,
       ready: false,
       winner: false,
       socketId: socket.id,
-      name
+      name,
+      order: 0
     }
 
     gameState.emitEvent(Events.NEW_PLAYER_JOINED, newPlayer)
