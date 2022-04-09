@@ -5,7 +5,7 @@ type IGameState = {
   state: 'initial' | 'lobby' | 'ingame' | 'gameover'
   players: IPlayer[]
   moves: any[]
-  nextAction: any
+  currentPlayerOrder: number
   roomId: string
   deck: ICard[]
 }

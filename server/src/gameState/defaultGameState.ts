@@ -4,7 +4,7 @@ const defaultGameState: IGameState = {
   state: 'lobby',
   players: [],
   moves: [],
-  nextAction: {},
+  currentPlayerOrder: 1,
   roomId: '',
   deck: []
 }
