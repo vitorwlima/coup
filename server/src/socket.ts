@@ -5,11 +5,11 @@ import { JoinRoom, JoinRoomEventType } from './actions/toHost/room/join'
 import {
   UpdatePlayerList,
   UpdatePlayerListEventType
-} from './actions/toGamestate/room/updatePlayerList'
-import { CreateRoom, CreateRoomEventType } from './actions/toGamestate/room/create'
+} from './actions/toGameState/room/updatePlayerList'
+import { CreateRoom, CreateRoomEventType } from './actions/toGameState/room/create'
 import { Events } from './types/Events'
-import { SwitchReady, SwitchReadyEventType } from './actions/toGamestate/player/switchReady'
-import { StartGame, StartGameEventType } from './actions/toGamestate/room/startGame'
+import { SwitchReady, SwitchReadyEventType } from './actions/toGameState/player/switchReady'
+import { StartGame, StartGameEventType } from './actions/toGameState/room/startGame'
 
 const runSocket = (server: http.Server) => {
   const io = new Server(server, { cors: { origin: process.env.ORIGIN } })
