@@ -14,7 +14,7 @@ class UpdatePlayerList extends GeneralAction {
   }
 
   public exec(event: UpdatePlayerListEventType['args']) {
-    const { roomId, gameState: currentGameState } = this
+    const { roomId, socket, gameState: currentGameState } = this
     const { player } = event
 
     const gameState = GameState.getInstance(roomId)
@@ -23,7 +23,7 @@ class UpdatePlayerList extends GeneralAction {
     const newGameState = { ...currentGameState, players }
 
     gameState.update(newGameState)
-    console.info(`Usuário ${player.socketId} entrou na sala ${roomId}`)
+    console.info(`Usuário ${socket.id} entrou na sala ${roomId}`)
   }
 }
 
