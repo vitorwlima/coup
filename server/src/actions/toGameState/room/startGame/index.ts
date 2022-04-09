@@ -18,18 +18,18 @@ class StartGame extends GeneralAction {
 
     const gameStateInstance = GameState.getInstance(roomId)
 
-    const generateRandomOrdersForPlayers = (players: IPlayer[]): IPlayer[] => {
+    const generateRandomOrdersForPlayersAndInitialCoins = (players: IPlayer[]): IPlayer[] => {
       let numbersToGuess = players.map((_, i) => i + 1)
       return players.map(player => {
         const randomValue = numbersToGuess[Math.floor(Math.random() * numbersToGuess.length)]
         numbersToGuess = numbersToGuess.filter(item => item !== randomValue)
-        return { ...player, order: randomValue }
+        return { ...player, coins: 2, order: randomValue }
       })
     }
 
     const gameStateUpdatedPlayers: IGameState = {
       ...gameState,
-      players: generateRandomOrdersForPlayers(gameState.players),
+      players: generateRandomOrdersForPlayersAndInitialCoins(gameState.players),
       state: 'ingame'
     }
 
