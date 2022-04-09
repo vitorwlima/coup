@@ -4,7 +4,7 @@ import { Title } from 'src/components/Title'
 import { Footer } from 'src/components/Footer'
 import { Button } from 'src/components/Button'
 import { BackButton } from 'src/components/BackButton'
-import { Events } from 'src/types/events'
+import { Events } from 'src/types/Events'
 
 const Lobby = () => {
   const {

@@ -1,25 +1,12 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 
 import { socket } from 'src/socket'
-import { Cards } from 'src/types/cards'
-import { Events } from 'src/types/events'
-
-type Player = {
-  socketId: string
-  ready: boolean
-  cards: Cards[]
-  coins: number
-  name: string
-  alive: boolean
-  winner: boolean
-  isMe: boolean
-  host: boolean
-  order: number
-}
+import { Events } from 'src/types/Events'
+import { IPlayer } from 'src/types/IPlayer'
 
 type GameState = {
   state: 'initial' | 'lobby' | 'ingame' | 'gameover'
-  players: Player[]
+  players: IPlayer[]
   moves: any[]
   nextAction: any
   roomId: string
@@ -27,7 +14,7 @@ type GameState = {
 
 type GameStateCtx = {
   gameState: GameState
-  myPlayer: Player
+  myPlayer: IPlayer
   emitEvent: (eventName: string, args?: Object) => void
 }
 
@@ -39,7 +26,7 @@ const defaultGameState: GameState = {
   roomId: ''
 }
 
-const defaultPlayer: Player = {
+const defaultPlayer: IPlayer = {
   socketId: '',
   ready: false,
   cards: [],
@@ -81,7 +68,7 @@ const GameStateContextProvider = ({ children }: { children: ReactNode }) => {
     setGameState(newGameState)
   })
 
-  socket.on(Events.NEW_PLAYER_JOINED, (event: Player) => {
+  socket.on(Events.NEW_PLAYER_JOINED, (event: IPlayer) => {
     if (!isHost) return
     emitEvent(Events.UPDATE_PLAYER_LIST, {
       player: event

@@ -6,7 +6,7 @@ import { PregameContainer } from 'src/components/PregameContainer'
 import { Button } from 'src/components/Button'
 import { BackButton } from 'src/components/BackButton'
 import { useGameState } from 'src/hooks/useGameState'
-import { Events } from 'src/types/events'
+import { Events } from 'src/types/Events'
 
 type ActionToTake = 'none' | 'create' | 'join'
 
