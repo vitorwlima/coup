@@ -1,17 +1,17 @@
 # Coup
 
-Em Coup, você quer ser o último jogador com influência no jogo. A influência é representada por cartas de personagens com a face para baixo em sua área de jogo.
+You are head of a family in an Italian city-state, a city run by a weak and corrupt court. You need to manipulate, bluff and bribe your way to power. Your object is to destroy the influence of all the other families, forcing them into exile. Only one family will survive...
 
-Cada jogador começa o jogo com duas moedas e dois de influência – ou seja, duas cartas de personagens viradas para baixo, o baralho de quinze consiste em três cópias de cinco personagens diferentes, cada um com um conjunto único de poderes: duque, assassino, condessa, capitão e embaixador.
+In **Coup**, you want to be the last player with influence in the game, with influence being represented by face-down character cards in your playing area.
 
-Na sua vez, você pode ter qualquer uma das ações listadas para cada personagem, independentemente de quais personagens você realmente tenha na sua frente.
+> Find more about game rules here: https://boardgamegeek.com/boardgame/131357/coup
 
-## Como rodar o projeto
+## Run the project locally
 
 ```bash
-  # Iniciar o servidor
-  cd server && yarn dev
+# Start server
+cd server && yarn dev
 
-  # Iniciar o client
-  cd client && yarn dev
+# Start client
+cd client && yarn dev
 ```
