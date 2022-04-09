@@ -1,3 +1,4 @@
+import { ICard } from './ICard'
 import { IPlayer } from './IPlayer'
 
 type IGameState = {
@@ -6,6 +7,7 @@ type IGameState = {
   moves: any[]
   nextAction: any
   roomId: string
+  deck: ICard[]
 }
 
 export type { IGameState }

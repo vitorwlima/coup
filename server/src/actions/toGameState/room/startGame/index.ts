@@ -1,3 +1,4 @@
+import { Deck } from '../../../../deck'
 import { GameState } from '../../../../gameState'
 import { IGameState } from '../../../../types/IGameState'
 import { IPlayer } from '../../../../types/IPlayer'
@@ -26,13 +27,16 @@ class StartGame extends GeneralAction {
       })
     }
 
-    const newGameState: IGameState = {
+    const gameStateUpdatedPlayers: IGameState = {
       ...gameState,
       players: generateRandomOrdersForPlayers(gameState.players),
       state: 'ingame'
     }
 
-    gameStateInstance.update(newGameState)
+    const deckInstance = new Deck()
+    const finalGameState = deckInstance.dealCards(gameStateUpdatedPlayers)
+
+    gameStateInstance.update(finalGameState)
     console.info(`Usuário ${socket.id} iniciou o jogo`)
   }
 }

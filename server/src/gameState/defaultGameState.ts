@@ -5,7 +5,8 @@ const defaultGameState: IGameState = {
   players: [],
   moves: [],
   nextAction: {},
-  roomId: ''
+  roomId: '',
+  deck: []
 }
 
 export { defaultGameState }
