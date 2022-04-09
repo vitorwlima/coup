@@ -1,6 +1,4 @@
-import { io } from '../../../..'
 import { GameState } from '../../../../gameState'
-import { defaultGameState } from '../../../../gameState/defaultGameState'
 import { GeneralAction } from '../../../index'
 
 type StartGameEventType = GeneralAction & {
