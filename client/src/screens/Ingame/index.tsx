@@ -9,7 +9,11 @@ const Ingame = () => {
     <div className='pt-10 pb-8 px-3'>
       <section className='flex gap-4 justify-center'>
         {playersInCorrectOrder.map(player => (
-          <PlayerContainer key={player.order} player={player} />
+          <PlayerContainer
+            key={player.order}
+            player={player}
+            isPlayersTurn={player.order === gameState.currentPlayerOrder}
+          />
         ))}
       </section>
     </div>

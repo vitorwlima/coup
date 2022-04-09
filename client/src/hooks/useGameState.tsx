@@ -3,27 +3,21 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { socket } from 'src/socket'
 import { Events } from 'src/types/Events'
 import { IPlayer } from 'src/types/IPlayer'
-
-type GameState = {
-  state: 'initial' | 'lobby' | 'ingame' | 'gameover'
-  players: IPlayer[]
-  moves: any[]
-  nextAction: any
-  roomId: string
-}
+import { IGameState } from 'src/types/IGameState'
 
 type GameStateCtx = {
-  gameState: GameState
+  gameState: IGameState
   myPlayer: IPlayer
   emitEvent: (eventName: string, args?: Object) => void
 }
 
-const defaultGameState: GameState = {
-  state: 'initial',
+const defaultGameState: IGameState = {
+  state: 'lobby',
   players: [],
   moves: [],
-  nextAction: {},
-  roomId: ''
+  currentPlayerOrder: 1,
+  roomId: '',
+  deck: []
 }
 
 const defaultPlayer: IPlayer = {
@@ -54,7 +48,7 @@ const GameStateContextProvider = ({ children }: { children: ReactNode }) => {
     socket.emit(eventName, { args, gameState, roomId: gameState.roomId })
   }
 
-  socket.on(Events.UPDATE_GAME, (event: GameState) => {
+  socket.on(Events.UPDATE_GAME, (event: IGameState) => {
     const newGameState = {
       ...event,
       players: event.players.map((player, index) => ({

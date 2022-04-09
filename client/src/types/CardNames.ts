@@ -1,9 +1,9 @@
-enum Cards {
+enum CardNames {
   ASSASSINO = 'assassino',
   CAPITAO = 'capitao',
   CONDESSA = 'condessa',
   DUQUE = 'duque',
-  EMBAIXADOR = 'embaixador',
+  EMBAIXADOR = 'embaixador'
 }
 
-export { Cards }
+export { CardNames }
