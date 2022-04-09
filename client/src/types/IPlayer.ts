@@ -1,9 +1,9 @@
-import { Cards } from './Cards'
+import { ICard } from './ICard'
 
 type IPlayer = {
   socketId: string
   ready: boolean
-  cards: Cards[]
+  cards: ICard[]
   coins: number
   name: string
   alive: boolean
