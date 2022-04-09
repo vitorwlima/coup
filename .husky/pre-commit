@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd server && yarn lint && cd .. && cd client && yarn lint --fix
+yarn precommit

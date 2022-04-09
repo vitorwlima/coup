@@ -15,5 +15,5 @@
     "no-redeclare": "off",
     "no-unused-vars": "off"
   },
-  "ignorePatterns": ["build"]
+  "ignorePatterns": ["build", "tests", "coverage"]
 }

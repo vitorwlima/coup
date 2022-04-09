@@ -5,7 +5,8 @@
   "author": "Vitor <vitorwlima13@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "precommit": "cd server && yarn test && yarn lint && cd .. && cd client && yarn lint --fix"
   },
   "devDependencies": {
     "husky": "^7.0.4"

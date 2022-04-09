@@ -1,3 +1,0 @@
-const counterMoves = {}
-
-export { counterMoves }

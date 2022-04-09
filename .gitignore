@@ -5,6 +5,7 @@ node_modules
 server/node_modules
 server/.env
 server/build
+server/coverage
 
 # CLIENT
 client/node_modules
