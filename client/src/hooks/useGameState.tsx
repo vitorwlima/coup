@@ -12,7 +12,7 @@ type GameStateCtx = {
 }
 
 const defaultGameState: IGameState = {
-  state: 'lobby',
+  state: 'initial',
   players: [],
   moves: [],
   currentPlayerOrder: 1,
