@@ -10,6 +10,7 @@ import { getColorByActiveMove } from 'src/utils/getColorByActiveMove'
 const Ingame = () => {
   const { gameState, myPlayer, emitEvent } = useGameState()
   const playersInCorrectOrder = [...gameState.players].sort((a, b) => a.order - b.order)
+  const notInTurn = myPlayer.order !== gameState.currentPlayerOrder
 
   return (
     <div className='pt-10 pb-8 px-3 flex flex-col items-center justify-between h-screen'>
@@ -32,14 +33,24 @@ const Ingame = () => {
         <section className='flex-1'>
           <div className='flex items-center gap-3'>
             {Object.values(PassiveMoves).map(move => (
-              <MoveButton key={move} background='bg-zinc-100' color='text-zinc-900'>
+              <MoveButton
+                key={move}
+                background='bg-zinc-100'
+                color='text-zinc-900'
+                disabled={notInTurn}
+              >
                 {getDisplayNameByMove(move, { toUpperCase: true })}
               </MoveButton>
             ))}
           </div>
           <div className='flex items-center gap-3 mt-3'>
             {Object.values(ActiveMoves).map(move => (
-              <MoveButton key={move} background={getColorByActiveMove(move)} color='text-gray-100'>
+              <MoveButton
+                key={move}
+                background={getColorByActiveMove(move)}
+                color='text-gray-100'
+                disabled={notInTurn}
+              >
                 {getDisplayNameByMove(move, { toUpperCase: true })}
               </MoveButton>
             ))}
