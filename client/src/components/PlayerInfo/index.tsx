@@ -14,7 +14,7 @@ const PlayerInfo = ({ player }: Props) => {
         <FaCoins />
         <p className='font-bold'>{player.coins}</p>
       </div>
-      <div>
+      <div className='flex gap-x-1'>
         {player.cards.map(card => (
           <Image
             key={card.id}

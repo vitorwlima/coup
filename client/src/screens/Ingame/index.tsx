@@ -1,6 +1,11 @@
 import { PlayerContainer } from 'src/components/PlayerContainer'
 import { PlayerInfo } from 'src/components/PlayerInfo'
 import { useGameState } from 'src/hooks/useGameState'
+import { MoveButton } from 'src/components/MoveButton'
+import { ActiveMoves } from 'src/types/ActiveMoves'
+import { PassiveMoves } from 'src/types/PassiveMoves'
+import { getDisplayNameByMove } from 'src/utils/getDisplayNameByMove'
+import { getColorByActiveMove } from 'src/utils/getColorByActiveMove'
 
 const Ingame = () => {
   const { gameState, myPlayer, emitEvent } = useGameState()
@@ -20,12 +25,26 @@ const Ingame = () => {
       <section>
         <p className='text-3xl font-bold'>Texto explicado: Vez de jogar...</p>
       </section>
-      <section className='flex items-center justify-between w-full'>
+      <section className='flex items-end justify-between w-full gap-14'>
         <section>
           <PlayerInfo player={myPlayer} />
         </section>
-        <section>osdadasdsadsadasdsadi</section>
-        <section>oi</section>
+        <section className='flex-1'>
+          <div className='flex items-center gap-3'>
+            {Object.values(PassiveMoves).map(move => (
+              <MoveButton key={move} background='bg-zinc-100' color='text-zinc-900'>
+                {getDisplayNameByMove(move, { toUpperCase: true })}
+              </MoveButton>
+            ))}
+          </div>
+          <div className='flex items-center gap-3 mt-3'>
+            {Object.values(ActiveMoves).map(move => (
+              <MoveButton key={move} background={getColorByActiveMove(move)} color='text-gray-100'>
+                {getDisplayNameByMove(move, { toUpperCase: true })}
+              </MoveButton>
+            ))}
+          </div>
+        </section>
       </section>
     </div>
   )
