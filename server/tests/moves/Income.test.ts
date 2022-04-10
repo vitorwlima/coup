@@ -7,8 +7,7 @@ describe('Move - Income', () => {
       player => player.order === gameState.currentPlayerOrder
     )!.coins
 
-    const incomeInstance = new Income(gameState)
-    const newGameState = incomeInstance.exec()
+    const newGameState = new Income({ gameState }).exec()
     const coinsAfter = newGameState.players.find(
       player => player.order === gameState.currentPlayerOrder
     )!.coins

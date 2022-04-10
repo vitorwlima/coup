@@ -12,6 +12,10 @@ const Ingame = () => {
   const playersInCorrectOrder = [...gameState.players].sort((a, b) => a.order - b.order)
   const notInTurn = myPlayer.order !== gameState.currentPlayerOrder
 
+  const handleMove = (move: PassiveMoves | ActiveMoves) => {
+    emitEvent(move)
+  }
+
   return (
     <div className='pt-10 pb-8 px-3 flex flex-col items-center justify-between h-screen'>
       <section className='flex gap-4 justify-center'>
@@ -37,6 +41,7 @@ const Ingame = () => {
                 key={move}
                 background='bg-zinc-100'
                 color='text-zinc-900'
+                onClick={() => handleMove(move)}
                 disabled={notInTurn}
               >
                 {getDisplayNameByMove(move, { toUpperCase: true })}
@@ -49,6 +54,7 @@ const Ingame = () => {
                 key={move}
                 background={getColorByActiveMove(move)}
                 color='text-gray-100'
+                onClick={() => handleMove(move)}
                 disabled={notInTurn}
               >
                 {getDisplayNameByMove(move, { toUpperCase: true })}

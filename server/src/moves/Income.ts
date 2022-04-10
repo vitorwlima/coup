@@ -1,8 +1,12 @@
 import { Moves } from '.'
-import { IGameState } from '../types/IGameState'
+import { GameState } from '../gameState'
 
 class Income extends Moves {
-  exec(): IGameState {
+  constructor({ gameState }: Moves) {
+    super(gameState)
+  }
+
+  exec() {
     const { gameState } = this
     const newPlayers = gameState.players.map(player =>
       player.order === gameState.currentPlayerOrder
@@ -11,6 +15,12 @@ class Income extends Moves {
     )
     const newGameState = { ...gameState, players: newPlayers }
     return newGameState
+  }
+
+  update() {
+    const newGameState = this.exec()
+    const gameStateInstance = GameState.getInstance(this.gameState.roomId)
+    gameStateInstance.updateAndEndTurn(newGameState)
   }
 }
 
