@@ -4,6 +4,7 @@ export default {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   preset: 'ts-jest',
+  modulePathIgnorePatterns: ['<rootDir>/build/'],
   transform: {
     '^.+\\.ts?$': 'ts-jest'
   }
