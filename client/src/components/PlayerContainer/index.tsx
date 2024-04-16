@@ -1,5 +1,4 @@
-import { FaCoins } from 'react-icons/fa'
-
+import { LucideCoins } from 'lucide-react'
 import { IPlayer } from 'src/types/IPlayer'
 
 type Props = {
@@ -26,7 +25,7 @@ const PlayerContainer = ({ player, isPlayersTurn }: Props) => {
         ))}
       </div>
       <div className='flex items-center gap-x-2'>
-        <FaCoins />
+        <LucideCoins />
         <p className='font-bold'>{player.coins}</p>
       </div>
     </div>

@@ -1,5 +1,5 @@
+import { LucideCoins } from 'lucide-react'
 import Image from 'next/image'
-import { FaCoins } from 'react-icons/fa'
 
 import { IPlayer } from 'src/types/IPlayer'
 
@@ -11,7 +11,7 @@ const PlayerInfo = ({ player }: Props) => {
   return (
     <div>
       <div className='flex items-center gap-2 text-3xl mb-3'>
-        <FaCoins />
+        <LucideCoins />
         <p className='font-bold'>{player.coins}</p>
       </div>
       <div className='flex gap-x-1'>
